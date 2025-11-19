@@ -104,20 +104,6 @@ img:hover{
   box-shadow:0 10px 30px rgba(0,0,0,0.07);
 }
 
-/* domain pill */
-.domain-pill{
-  position:fixed;
-  left:50%;
-  bottom:28px;
-  transform:translateX(-50%);
-  background:var(--pill-bg);
-  padding:12px 24px;
-  border-radius:999px;
-  font-weight:600;
-  color:#111;
-  box-shadow:0 12px 30px rgba(0,0,0,0.08);
-}
-
 /* lightbox */
 .lightbox{
   position:fixed;
