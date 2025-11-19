@@ -1,0 +1,153 @@
+:root{
+  --bg: #ffffff;
+  --text: #111;
+  --muted: #777;
+  --pill-bg: rgba(0,0,0,0.06);
+  --max-width: 1100px;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* HEADER */
+.site-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 22px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(5px);
+  position: relative;
+}
+
+.site-title{
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Time on right */
+.time-right {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 16px;
+}
+
+/* MAIN */
+.main{
+  max-width: var(--max-width);
+  margin: 20px auto;
+  padding: 0 20px 140px;
+}
+
+/* rows */
+.row{
+  display:flex;
+  gap:18px;
+  margin:20px 0;
+}
+
+.small-grid{
+  flex-wrap:wrap;
+}
+.small-grid img{
+  width:100px;
+  height:100px;
+  object-fit:cover;
+  border-radius:4px;
+}
+
+.large-grid img{
+  width:220px;
+  height:320px;
+  object-fit:cover;
+  border-radius:6px;
+}
+
+.horizontal-strip{
+  overflow-x:auto;
+}
+.horizontal-strip .strip-inner{
+  display:flex;
+  gap:14px;
+}
+.horizontal-strip img{
+  width:84px;
+  height:84px;
+  object-fit:cover;
+  border-radius:6px;
+}
+.horizontal-strip.mid img{
+  width:180px;
+  height:260px;
+}
+
+/* hover */
+img{
+  cursor:pointer;
+  transition:transform .2s, box-shadow .2s;
+}
+img:hover{
+  transform:scale(1.03);
+  box-shadow:0 10px 30px rgba(0,0,0,0.07);
+}
+
+/* domain pill */
+.domain-pill{
+  position:fixed;
+  left:50%;
+  bottom:28px;
+  transform:translateX(-50%);
+  background:var(--pill-bg);
+  padding:12px 24px;
+  border-radius:999px;
+  font-weight:600;
+  color:#111;
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* lightbox */
+.lightbox{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,.75);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .2s;
+}
+.lightbox.show{
+  opacity:1;
+  visibility:visible;
+}
+
+.lb-image-wrap img{
+  max-width:90%;
+  max-height:85%;
+}
+
+.lb-close, .lb-prev, .lb-next{
+  position:absolute;
+  background:none;
+  border:none;
+  color:white;
+  font-size:22px;
+  cursor:pointer;
+}
+.lb-close{ top:20px; right:20px; }
+.lb-prev{ left:16px; }
+.lb-next{ right:16px; }
