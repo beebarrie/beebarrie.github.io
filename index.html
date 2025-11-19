@@ -1,87 +1,43 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Binta Barrie — Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Binta Barrie — Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="site-title">Binta Barrie</div>
+  <header class="site-header">
+    <div class="site-title">Binta Barrie</div>
     <div class="time-right" id="rightTime"></div>
-  </header>
+  </header>
 
-  <main class="main">
-    <!-- Top thin horizontal scroll row (small thumbs) -->
-    <section class="strip horizontal-strip" aria-label="Top thumbnails">
-      <div class="strip-inner">
-        <img src="images/top-1.jpg" alt="" loading="lazy" />
-        <img src="images/top-2.jpg" alt="" loading="lazy" />
-        <img src="images/top-3.jpg" alt="" loading="lazy" />
-        <img src="images/top-4.jpg" alt="" loading="lazy" />
-        <img src="images/top-5.jpg" alt="" loading="lazy" />
-        <img src="images/top-6.jpg" alt="" loading="lazy" />
-      </div>
-    </section>
+  <main class="main">
 
-    <!-- Content Gallery Layout -->
-    <section class="gallery">
+    <!-- Top thin scroll -->
+    <section class="strip horizontal-strip" aria-label="Top thumbnails">
+      <div class="strip-inner">
+        <img src="images/top-1.jpg" loading="lazy" />
+        <img src="images/top-2.jpg" loading="lazy" />
+        <img src="images/top-3.jpg" loading="lazy" />
+        <img src="images/top-4.jpg" loading="lazy" />
+        <img src="images/top-5.jpg" loading="lazy" />
+        <img src="images/top-6.jpg" loading="lazy" />
+      </div>
+    </section>
 
-      <!-- small grid row -->
-      <div class="row small-grid">
-        <img src="images/g1-1.jpg" loading="lazy"/>
-        <img src="images/g1-2.jpg" loading="lazy"/>
-        <img src="images/g1-3.jpg" loading="lazy"/>
-        <img src="images/g1-4.jpg" loading="lazy"/>
-        <img src="images/g1-5.jpg" loading="lazy"/>
-      </div>
+    <section class="gallery">
 
-      <!-- mid horizontal strip -->
-      <div class="row horizontal-strip mid">
-        <div class="strip-inner">
-          <img src="images/strip-1.jpg" loading="lazy"/>
-          <img src="images/strip-2.jpg" loading="lazy"/>
-          <img src="images/strip-3.jpg" loading="lazy"/>
-          <img src="images/strip-4.jpg" loading="lazy"/>
-        </div>
-      </div>
+      <!-- small grid -->
+      <div class="row small-grid">
+        <img src="images/g1-1.jpg" loading="lazy" />
+        <img src="images/g1-2.jpg" loading="lazy" />
+        <img src="images/g1-3.jpg" loading="lazy" />
+        <img src="images/g1-4.jpg" loading="lazy" />
+        <img src="images/g1-5.jpg" loading="lazy" />
+      </div>
 
-      <!-- large thumbnails -->
-      <div class="row large-grid">
-        <img src="images/large-1.jpg" loading="lazy"/>
-        <img src="images/large-2.jpg" loading="lazy"/>
-        <img src="images/large-3.jpg" loading="lazy"/>
-        <img src="images/large-4.jpg" loading="lazy"/>
-      </div>
-
-      <!-- repeat small row -->
-      <div class="row small-grid">
-        <img src="images/g3-1.jpg" loading="lazy"/>
-        <img src="images/g3-2.jpg" loading="lazy"/>
-        <img src="images/g3-3.jpg" loading="lazy"/>
-        <img src="images/g3-4.jpg" loading="lazy"/>
-        <img src="images/g3-5.jpg" loading="lazy"/>
-      </div>
-
-    </section>
-  </main>
-
-  <!-- Floating domain pill -->
-  <div class="domain-pill" id="domainPill">
-    bintabarrie.com
-  </div>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <button class="lb-close" id="lbClose">✕</button>
-    <button class="lb-prev" id="lbPrev">◀</button>
-    <div class="lb-image-wrap">
-      <img src="" id="lbImage" />
-    </div>
-    <button class="lb-next" id="lbNext">▶</button>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+      <!-- mid strip -->
+      <div class="row horizontal-strip mid">
+        <div class="strip-inner">
+          <img src="images/strip-1.jpg" loading="lazy"
