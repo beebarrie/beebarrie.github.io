@@ -49,9 +49,5 @@
     if(e.key === "ArrowRight") nextBtn.click();
     if(e.key === "ArrowLeft") prevBtn.click();
   });
-
-  // Domain pill
-  document.getElementById("domainPill").onclick = () => {
-    window.open("https://bintabarrie.com", "_blank");
   };
 })();
