@@ -1,55 +1,91 @@
-// ---- TIME DISPLAY ----
-function updateTime() {
-  const now = new Date();
-  let h = now.getHours();
-  let m = now.getMinutes().toString().padStart(2,"0");
-  let ampm = h >= 12 ? "PM" : "AM";
-  h = h % 12 || 12;
+// Basic interactivity: clock update + lightbox preview + keyboard nav
 
-  document.getElementById("rightTime").textContent = `${h}:${m} ${ampm}`;
-}
-updateTime();
-setInterval(updateTime, 10000);
+(function(){
+  // Update header clock (left static-ish, right seconds)
+  const left = document.getElementById('leftTime');
+  const right = document.getElementById('rightTime');
 
-// ---- LIGHTBOX ----
-const images = Array.from(document.querySelectorAll("img"));
-const lightbox = document.getElementById("lightbox");
-const lbImage = document.getElementById("lbImage");
-const lbClose = document.getElementById("lbClose");
-const lbPrev = document.getElementById("lbPrev");
-const lbNext = document.getElementById("lbNext");
+  function two(n){ return n < 10 ? '0' + n : n; }
 
-let currentIndex = 0;
+  function updateTime(){
+    const d = new Date();
+    left.textContent = `${d.getHours()}:${two(d.getMinutes())}`;
+    right.textContent = `${d.getHours()}:${two(d.getMinutes())}:${two(d.getSeconds())}`;
+  }
+  updateTime();
+  setInterval(updateTime, 1000);
 
-images.forEach((img, index) => {
-  img.addEventListener("click", () => {
-    currentIndex = index;
-    openLightbox(images[currentIndex].src);
-  });
-});
+  // Lightbox logic
+  const images = Array.from(document.querySelectorAll('img'));
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImage');
+  const lbClose = document.getElementById('lbClose');
+  const lbPrev = document.getElementById('lbPrev');
+  const lbNext = document.getElementById('lbNext');
 
-function openLightbox(src){
-  lbImage.src = src;
-  lightbox.classList.add("show");
-}
+  let currentIndex = -1;
+  // create array of unique image srcs (exclude UI images if any)
+  const gallery = images.map(i => i.getAttribute('src'));
 
-function closeLightbox(){
-  lightbox.classList.remove("show");
-}
+  function openLightbox(index){
+    if(index < 0 || index >= gallery.length) return;
+    currentIndex = index;
+    lbImg.src = gallery[currentIndex];
+    lbImg.alt = images[currentIndex].alt || '';
+    lightbox.classList.add('show');
+    lightbox.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('show');
+    lightbox.setAttribute('aria-hidden','true');
+    lbImg.src = '';
+    document.body.style.overflow = '';
+  }
+  function next(){
+    if(currentIndex < gallery.length - 1) openLightbox(currentIndex + 1);
+    else openLightbox(0);
+  }
+  function prev(){
+    if(currentIndex > 0) openLightbox(currentIndex - 1);
+    else openLightbox(gallery.length - 1);
+  }
 
-lbClose.onclick = closeLightbox;
+  // click on any image opens lightbox at that index
+  images.forEach((img, idx) => {
+    img.addEventListener('click', (e) => {
+      openLightbox(idx);
+    });
+    img.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') openLightbox(idx);
+    });
+  });
 
-lbPrev.onclick = () => {
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  lbImage.src = images[currentIndex].src;
-};
+  lbClose.addEventListener('click', closeLightbox);
+  lbNext.addEventListener('click', next);
+  lbPrev.addEventListener('click', prev);
 
-lbNext.onclick = () => {
-  currentIndex = (currentIndex + 1) % images.length;
-  lbImage.src = images[currentIndex].src;
-};
+  // close when clicking the backdrop (but not when clicking image)
+  lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox) closeLightbox();
+  });
 
-// close on background click
-lightbox.addEventListener("click", (e) => {
-  if(e.target === lightbox) closeLightbox();
-});
+  // keyboard support
+  window.addEventListener('keydown', (e) => {
+    if(lightbox.classList.contains('show')){
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowRight') next();
+      if(e.key === 'ArrowLeft') prev();
+    }
+  });
+
+  // domain pill click (open in new tab)
+  document.getElementById('domainPill').addEventListener('click', () => {
+    window.open('https://khalilghani.com', '_blank');
+  });
+
+  // make keyboard accessible
+  document.getElementById('domainPill').addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' ') window.open('https://khalilghani.com', '_blank');
+  });
+})();
