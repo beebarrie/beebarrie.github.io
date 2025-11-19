@@ -1,12 +1,12 @@
 (function(){
-  const left = document.getElementById("leftTime");
+  
   const right = document.getElementById("rightTime");
 
   function pad(n){ return n < 10 ? "0" + n : n; }
 
   function tick(){
     const d = new Date();
-    left.textContent = `${d.getHours()}:${pad(d.getMinutes())}`;
+   
     right.textContent = `${d.getHours()}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
   }
   tick();
