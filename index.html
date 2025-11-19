@@ -1,84 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Binta Barrie | Portfolio</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Chicago", sans-serif;
-      background: #c3c3c3;
-    }
-
-    /* Retro Mac Window */
-    .window {
-      width: 80%;
-      margin: 40px auto;
-      background: #ffffff;
-      border: 2px solid #000;
-      box-shadow: 4px 4px 0px #000;
-    }
-
-    .title-bar {
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      font-size: 14px;
-    }
-
-    .content {
-      padding: 20px;
-      font-size: 15px;
-    }
-
-    h1, h2 {
-      margin-top: 0;
-      font-weight: bold;
-    }
-
-    .project-section {
-      margin-bottom: 30px;
-    }
-
-    ul {
-      list-style-type: square;
-      padding-left: 20px;
-    }
-
-    a {
-      color: #000;
-      text-decoration: underline;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Binta Barrie — Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="window">
-    <div class="title-bar">Binta Barrie — Portfolio</div>
-    <div class="content">
-      <h1>Binta Barrie</h1>
-      <p>Photography & Graphic Design</p>
+  <header class="site-header">
+    <div class="time-left" aria-hidden="true" id="leftTime">11:28</div>
+    <div class="site-title">Binta Barrie</div>
+    <div class="time-right" id="rightTime" aria-hidden="true">11:28:00</div>
+  </header>
 
-      <div class="project-section">
-        <h2>📷 Photography Projects</h2>
-        <ul>
-          <li>Project 1</li>
-          <li>Project 2</li>
-          <li>Project 3</li>
-        </ul>
-      </div>
+  <main class="main">
+    <!-- Top thin horizontal scroll row (small thumbs) -->
+    <section class="strip horizontal-strip" aria-label="Top thumbnails">
+      <div class="strip-inner">
+        <img src="images/top-1.jpg" alt="" loading="lazy" />
+        <img src="images/top-2.jpg" alt="" loading="lazy" />
+        <img src="images/top-3.jpg" alt="" loading="lazy" />
+        <img src="images/top-4.jpg" alt="" loading="lazy" />
+        <img src="images/top-5.jpg" alt="" loading="lazy" />
+        <img src="images/top-6.jpg" alt="" loading="lazy" />
+      </div>
+    </section>
 
-      <div class="project-section">
-        <h2>🎨 Graphic Design Projects</h2>
-        <ul>
-          <li>Design Set 1</li>
-          <li>Poster Series</li>
-          <li>Branding Work</li>
-        </ul>
-      </div>
+    <!-- Content Gallery Layout -->
+    <section class="gallery">
 
-      <p>Contact: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
-    </div>
-  </div>
+      <!-- small grid row -->
+      <div class="row small-grid">
+        <img src="images/g1-1.jpg" loading="lazy"/>
+        <img src="images/g1-2.jpg" loading="lazy"/>
+        <img src="images/g1-3.jpg" loading="lazy"/>
+        <img src="images/g1-4.jpg" loading="lazy"/>
+        <img src="images/g1-5.jpg" loading="lazy"/>
+      </div>
+
+      <!-- mid horizontal strip -->
+      <div class="row horizontal-strip mid">
+        <div class="strip-inner">
+          <img src="images/strip-1.jpg" loading="lazy"/>
+          <img src="images/strip-2.jpg" loading="lazy"/>
+          <img src="images/strip-3.jpg" loading="lazy"/>
+          <img src="images/strip-4.jpg" loading="lazy"/>
+        </div>
+      </div>
+
+      <!-- large thumbnails -->
+      <div class="row large-grid">
+        <img src="images/large-1.jpg" loading="lazy"/>
+        <img src="images/large-2.jpg" loading="lazy"/>
+        <img src="images/large-3.jpg" loading="lazy"/>
+        <img src="images/large-4.jpg" loading="lazy"/>
+      </div>
+
+      <!-- repeat small row -->
+      <div class="row small-grid">
+        <img src="images/g3-1.jpg" loading="lazy"/>
+        <img src="images/g3-2.jpg" loading="lazy"/>
+        <img src="images/g3-3.jpg" loading="lazy"/>
+        <img src="images/g3-4.jpg" loading="lazy"/>
+        <img src="images/g3-5.jpg" loading="lazy"/>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Floating domain pill -->
+  <div class="domain-pill" id="domainPill">
+    bintabarrie.com
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lb-close" id="lbClose">✕</button>
+    <button class="lb-prev" id="lbPrev">◀</button>
+    <div class="lb-image-wrap">
+      <img src="" id="lbImage" />
+    </div>
+    <button class="lb-next" id="lbNext">▶</button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
