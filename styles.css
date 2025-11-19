@@ -1,12 +1,12 @@
 :root{
   --bg: #ffffff;
   --text: #111;
-  --muted: #9b9b9b;
-  --pill-bg: rgba(0,0,0,0.06);
+  --muted: #777;
   --max-width: 1100px;
 }
 
-*{box-sizing:border-box}
+*{ box-sizing:border-box; }
+
 body{
   margin:0;
   font-family: "Inter", system-ui, -apple-system, "Helvetica Neue", Arial;
@@ -17,7 +17,7 @@ body{
 .site-header{
   display:flex;
   align-items:center;
-  justify-content:center;
+  justify-content:space-between;
   padding:18px 22px;
   max-width:var(--max-width);
   margin:0 auto;
@@ -27,30 +27,20 @@ body{
   top:0;
   background:rgba(255,255,255,0.7);
   backdrop-filter: blur(4px);
-  position: relative;
 }
 
-.time-right{
-  position: absolute;
-  right: 22px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted);
-  font-size: 16px;
-  
-}
 .site-title{
   font-weight:600;
-  color:#777;
+  color:#444;
 }
 
 .main{
   max-width:var(--max-width);
   margin:20px auto;
-  padding:0 20px 140px;
+  padding:0 20px 80px;
 }
 
-/* Thumbnail rows */
+/* Gallery rows */
 .row{
   display:flex;
   gap:18px;
@@ -103,21 +93,6 @@ img:hover{
   box-shadow:0 10px 30px rgba(0,0,0,0.07);
 }
 
-/* Domain pill */
-.domain-pill{
-  position:fixed;
-  left:50%;
-  bottom:28px;
-  transform:translateX(-50%);
-  background:var(--pill-bg);
-  padding:12px 24px;
-  border-radius:999px;
-  font-weight:600;
-  color:#111;
-  box-shadow:0 12px 30px rgba(0,0,0,0.08);
-  cursor:pointer;
-}
-
 /* Lightbox */
 .lightbox{
   position:fixed;
@@ -128,8 +103,9 @@ img:hover{
   background:rgba(0,0,0,0.75);
   opacity:0;
   visibility:hidden;
-  transition:opacity .2s;
+  transition:opacity .25s ease;
 }
+
 .lightbox.show{
   opacity:1;
   visibility:visible;
@@ -148,6 +124,7 @@ img:hover{
   font-size:22px;
   cursor:pointer;
 }
+
 .lb-close{ top:20px; right:20px; }
 .lb-prev{ left:16px; }
 .lb-next{ right:16px; }
