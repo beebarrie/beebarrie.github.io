@@ -1,16 +1,16 @@
-(function(){
-  const left = document.getElementById("leftTime");
-  const right = document.getElementById("rightTime");
+function updateTime() {
+    document.getElementById("rightTime").textContent =
+        new Date().toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+            timeZone: "America/Los_Angeles"
+        });
+}
 
-  function pad(n){ return n < 10 ? "0" + n : n; }
-
-  function tick(){
-    const d = new Date();
-    left.textContent = `${d.getHours()}:${pad(d.getMinutes())}`;
-    right.textContent = `${d.getHours()}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-  }
-  tick();
-  setInterval(tick, 1000);
+updateTime();
+setInterval(updateTime, 1000);
 
   // Lightbox
   const imgs = Array.from(document.querySelectorAll("img"));
