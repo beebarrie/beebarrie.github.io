@@ -1,56 +1,57 @@
-/* --------------------------
-   RIGHT TIME (California)
----------------------------*/
+(function(){
+  const left = document.getElementById("leftTime");
+  const right = document.getElementById("rightTime");
 
-function updateTime() {
-  document.getElementById("rightTime").textContent =
-    new Date().toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-      timeZone: "America/Los_Angeles"
-    });
-}
+  function pad(n){ return n < 10 ? "0" + n : n; }
 
-updateTime();
-setInterval(updateTime, 1000);
+  function tick(){
+    const d = new Date();
+    left.textContent = `${d.getHours()}:${pad(d.getMinutes())}`;
+    right.textContent = `${d.getHours()}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  }
+  tick();
+  setInterval(tick, 1000);
 
+  // Lightbox
+  const imgs = Array.from(document.querySelectorAll("img"));
+  const box = document.getElementById("lightbox");
+  const lbImg = document.getElementById("lbImage");
+  const closeBtn = document.getElementById("lbClose");
+  const nextBtn = document.getElementById("lbNext");
+  const prevBtn = document.getElementById("lbPrev");
 
-/* --------------------------
-   LIGHTBOX LOGIC
----------------------------*/
+  let index = 0;
+  const gallery = imgs.map(i => i.src);
 
-const imgs = document.querySelectorAll("img");
-const lightbox = document.getElementById("lightbox");
-const lbImg = document.getElementById("lbImage");
-const lbClose = document.getElementById("lbClose");
-const lbPrev = document.getElementById("lbPrev");
-const lbNext = document.getElementById("lbNext");
+  function open(i){
+    index = i;
+    lbImg.src = gallery[index];
+    box.classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
 
-let currentIndex = 0;
-const images = Array.from(imgs).map(img => img.src);
+  function close(){
+    box.classList.remove("show");
+    document.body.style.overflow = "";
+  }
 
-// open lightbox
-imgs.forEach((img, i) => {
-  img.addEventListener("click", () => {
-    currentIndex = i;
-    lbImg.src = images[i];
-    lightbox.classList.add("show");
-  });
-});
+  imgs.forEach((img, i)=>{
+    img.addEventListener("click", ()=> open(i));
+  });
 
-// close
-lbClose.onclick = () => lightbox.classList.remove("show");
+  closeBtn.addEventListener("click", close);
+  nextBtn.addEventListener("click", ()=> open((index + 1) % gallery.length));
+  prevBtn.addEventListener("click", ()=> open((index - 1 + gallery.length) % gallery.length));
 
-// next
-lbNext.onclick = () => {
-  currentIndex = (currentIndex + 1) % images.length;
-  lbImg.src = images[currentIndex];
-};
+  window.addEventListener("keydown", (e)=>{
+    if(!box.classList.contains("show")) return;
+    if(e.key === "Escape") close();
+    if(e.key === "ArrowRight") nextBtn.click();
+    if(e.key === "ArrowLeft") prevBtn.click();
+  });
 
-// prev
-lbPrev.onclick = () => {
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  lbImg.src = images[currentIndex];
-};
+  // Domain pill
+  document.getElementById("domainPill").onclick = () => {
+    window.open("https://bintabarrie.com", "_blank");
+  };
+})();
