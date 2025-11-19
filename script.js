@@ -1,57 +1,55 @@
+// ---- TIME DISPLAY ----
 function updateTime() {
-    document.getElementById("rightTime").textContent =
-        new Date().toLocaleTimeString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: false,
-            timeZone: "America/Los_Angeles"
-        });
+  const now = new Date();
+  let h = now.getHours();
+  let m = now.getMinutes().toString().padStart(2,"0");
+  let ampm = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
+
+  document.getElementById("rightTime").textContent = `${h}:${m} ${ampm}`;
+}
+updateTime();
+setInterval(updateTime, 10000);
+
+// ---- LIGHTBOX ----
+const images = Array.from(document.querySelectorAll("img"));
+const lightbox = document.getElementById("lightbox");
+const lbImage = document.getElementById("lbImage");
+const lbClose = document.getElementById("lbClose");
+const lbPrev = document.getElementById("lbPrev");
+const lbNext = document.getElementById("lbNext");
+
+let currentIndex = 0;
+
+images.forEach((img, index) => {
+  img.addEventListener("click", () => {
+    currentIndex = index;
+    openLightbox(images[currentIndex].src);
+  });
+});
+
+function openLightbox(src){
+  lbImage.src = src;
+  lightbox.classList.add("show");
 }
 
-updateTime();
-setInterval(updateTime, 1000);
+function closeLightbox(){
+  lightbox.classList.remove("show");
+}
 
-  // Lightbox
-  const imgs = Array.from(document.querySelectorAll("img"));
-  const box = document.getElementById("lightbox");
-  const lbImg = document.getElementById("lbImage");
-  const closeBtn = document.getElementById("lbClose");
-  const nextBtn = document.getElementById("lbNext");
-  const prevBtn = document.getElementById("lbPrev");
+lbClose.onclick = closeLightbox;
 
-  let index = 0;
-  const gallery = imgs.map(i => i.src);
+lbPrev.onclick = () => {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  lbImage.src = images[currentIndex].src;
+};
 
-  function open(i){
-    index = i;
-    lbImg.src = gallery[index];
-    box.classList.add("show");
-    document.body.style.overflow = "hidden";
-  }
+lbNext.onclick = () => {
+  currentIndex = (currentIndex + 1) % images.length;
+  lbImage.src = images[currentIndex].src;
+};
 
-  function close(){
-    box.classList.remove("show");
-    document.body.style.overflow = "";
-  }
-
-  imgs.forEach((img, i)=>{
-    img.addEventListener("click", ()=> open(i));
-  });
-
-  closeBtn.addEventListener("click", close);
-  nextBtn.addEventListener("click", ()=> open((index + 1) % gallery.length));
-  prevBtn.addEventListener("click", ()=> open((index - 1 + gallery.length) % gallery.length));
-
-  window.addEventListener("keydown", (e)=>{
-    if(!box.classList.contains("show")) return;
-    if(e.key === "Escape") close();
-    if(e.key === "ArrowRight") nextBtn.click();
-    if(e.key === "ArrowLeft") prevBtn.click();
-  });
-
-  // Domain pill
-  document.getElementById("domainPill").onclick = () => {
-    window.open("https://bintabarrie.com", "_blank");
-  };
-})();
+// close on background click
+lightbox.addEventListener("click", (e) => {
+  if(e.target === lightbox) closeLightbox();
+});
